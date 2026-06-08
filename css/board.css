@@ -1,0 +1,286 @@
+/* Board and Candy Styles */
+
+#board-container {
+  position: relative;
+  width: min(95vw, 500px);
+  max-width: 500px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+  touch-action: none;
+}
+
+@media (max-width: 768px) {
+  #board-container {
+    width: min(98vw, 100vh - 320px);
+    max-width: min(98vw, 600px);
+  }
+}
+
+@media (max-width: 480px) {
+  #board-container {
+    width: min(96vw, 100vh - 280px);
+  }
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 8), 1fr);
+  grid-template-rows: repeat(var(--rows, 8), 1fr);
+  width: 100%;
+  height: 100%;
+  gap: 4px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 40px rgba(0, 0, 0, 0.4), 
+    inset 0 0 60px rgba(0, 0, 0, 0.2);
+}
+
+/* Cell Styles */
+.cell {
+  position: relative;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  overflow: visible;
+  touch-action: none;
+}
+
+.cell:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (hover: none) {
+  .cell:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  
+  .cell:active {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Candy Base Styles */
+.candy {
+  position: absolute;
+  width: 88%;
+  height: 88%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  transition: transform 0.15s ease, filter 0.15s ease;
+  will-change: transform;
+  cursor: grab;
+  user-select: none;
+  z-index: 2;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3), 
+    inset 0 2px 6px rgba(255, 255, 255, 0.4);
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.candy:active {
+  cursor: grabbing;
+}
+
+@media (hover: none) {
+  .candy {
+    cursor: default;
+  }
+}
+
+/* Candy Color Classes */
+.candy-red {
+  background: linear-gradient(135deg, #ff5252, #c62828);
+}
+
+.candy-blue {
+  background: linear-gradient(135deg, #42a5f5, #1565c0);
+}
+
+.candy-green {
+  background: linear-gradient(135deg, #66bb6a, #2e7d32);
+}
+
+.candy-yellow {
+  background: linear-gradient(135deg, #ffee58, #f9a825);
+}
+
+.candy-purple {
+  background: linear-gradient(135deg, #ab47bc, #6a1b9a);
+}
+
+.candy-orange {
+  background: linear-gradient(135deg, #ffa726, #e65100);
+}
+
+/* Special Candy: Striped Horizontal */
+.candy-striped-h::after {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 25%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  animation: stripe-shimmer 1.5s linear infinite;
+}
+
+/* Special Candy: Striped Vertical */
+.candy-striped-v::after {
+  content: '';
+  position: absolute;
+  width: 25%;
+  height: 80%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  animation: stripe-shimmer 1.5s linear infinite;
+}
+
+/* Special Candy: Wrapped */
+.candy-wrapped::before {
+  content: '';
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  border: 3px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  animation: glow-pulse 1.2s ease-in-out infinite;
+}
+
+/* Special Candy: Bomb */
+.candy-bomb {
+  background: radial-gradient(circle, #2a2a2a, #000000);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  animation: glow-pulse 1.5s ease-in-out infinite;
+  box-shadow: 
+    0 0 20px rgba(255, 100, 0, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Candy States */
+.candy.selected {
+  transform: scale(1.2);
+  filter: brightness(1.3) drop-shadow(0 0 12px currentColor);
+  z-index: 10;
+}
+
+.candy.matched {
+  animation: candy-pop 0.35s ease-out forwards;
+}
+
+.candy.falling {
+  animation: candy-fall var(--fall-duration, 0.3s) cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.candy.spawning {
+  animation: candy-spawn 0.25s ease-out forwards;
+}
+
+.cell.hint-pulse .candy {
+  animation: hint-bounce 0.5s ease-in-out infinite alternate;
+}
+
+/* Effects Layer */
+#fx-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  overflow: visible;
+}
+
+/* Floating Score Text */
+.floating-score {
+  position: absolute;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.5rem;
+  color: #FFD700;
+  text-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.8),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  z-index: 100;
+  animation: float-score 1s ease-out forwards;
+}
+
+/* Particle Effect */
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particle-burst 0.6s ease-out forwards;
+}
+
+/* Screen Shake Effect */
+#board-container.shake {
+  animation: screen-shake 0.3s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #board {
+    gap: 3px;
+    padding: 6px;
+    border-radius: 16px;
+  }
+  
+  .cell {
+    border-radius: 10px;
+  }
+  
+  .candy {
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+  }
+  
+  .floating-score {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #board {
+    gap: 2px;
+    padding: 5px;
+  }
+  
+  .cell {
+    border-radius: 8px;
+  }
+  
+  .candy {
+    font-size: clamp(1rem, 3.8vw, 1.5rem);
+    width: 90%;
+    height: 90%;
+  }
+  
+  .floating-score {
+    font-size: 1.1rem;
+  }
+  
+  .particle {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-height: 700px) {
+  .candy {
+    font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+  }
+}

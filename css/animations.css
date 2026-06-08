@@ -1,0 +1,245 @@
+/* All Keyframe Animations */
+
+/* Button Pulse Glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 6px 24px rgba(255, 78, 142, 0.5);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 8px 32px rgba(255, 78, 142, 0.8);
+  }
+}
+
+/* Candy Pop (Match Animation) */
+@keyframes candy-pop {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4) rotate(180deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Candy Fall Animation */
+@keyframes candy-fall {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Candy Spawn Animation */
+@keyframes candy-spawn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Hint Bounce */
+@keyframes hint-bounce {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  100% {
+    transform: scale(1.1);
+    filter: brightness(1.3);
+  }
+}
+
+/* Floating Score Text */
+@keyframes float-score {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-80px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Screen Shake */
+@keyframes screen-shake {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-4px, 2px); }
+  20% { transform: translate(4px, -2px); }
+  30% { transform: translate(-4px, -2px); }
+  40% { transform: translate(4px, 2px); }
+  50% { transform: translate(-4px, 2px); }
+  60% { transform: translate(4px, -2px); }
+  70% { transform: translate(-4px, -2px); }
+  80% { transform: translate(4px, 2px); }
+  90% { transform: translate(-4px, 2px); }
+}
+
+/* Combo Pop Animation */
+@keyframes combo-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Particle Burst */
+@keyframes particle-burst {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(var(--tx, 0), var(--ty, 0)) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(calc(var(--tx, 0) * 1.5), calc(var(--ty, 0) * 1.5)) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Win Star Spin In */
+@keyframes win-star-spin {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Menu Background Float */
+@keyframes menu-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, -30px) scale(1.1);
+  }
+  50% {
+    transform: translate(-15px, 20px) scale(0.9);
+  }
+  75% {
+    transform: translate(30px, 15px) scale(1.05);
+  }
+}
+
+/* Progress Bar Shimmer */
+@keyframes progress-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Glow Pulse (Wrapped Candy) */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+    filter: brightness(1.2);
+  }
+}
+
+/* Stripe Shimmer (Striped Candy) */
+@keyframes stripe-shimmer {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* Score Bump Animation */
+@keyframes score-bump {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Win Card Entrance */
+@keyframes win-card-entrance {
+  0% {
+    transform: scale(0.8) translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Gameover Card Shake In */
+@keyframes gameover-shake-in {
+  0% {
+    transform: scale(0.8) rotate(-5deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05) rotate(5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Fade In */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

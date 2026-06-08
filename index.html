@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Candy Blast - Match-3 Puzzle Game">
+  <meta name="theme-color" content="#1a0533">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Candy Blast">
+  <link rel="manifest" href="manifest.json">
+  <title>Candy Blast - Match. Blast. Repeat.</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/board.css">
+  <link rel="stylesheet" href="css/ui.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/screens.css">
+</head>
+<body>
+  <div id="app">
+    <!-- SCREEN: Main Menu -->
+    <div id="screen-menu" class="screen active">
+      <div class="menu-bg-anim"></div>
+      <div class="menu-logo">Candy Blast</div>
+      <div class="menu-tagline">Match. Blast. Repeat.</div>
+      <button id="btn-play" class="btn btn-primary btn-pulse">PLAY</button>
+      <button id="btn-settings" class="btn btn-secondary">Settings</button>
+      <div id="menu-highscore" class="menu-highscore"></div>
+    </div>
+
+    <!-- SCREEN: Settings Panel -->
+    <div id="screen-settings" class="screen">
+      <div class="panel-card">
+        <h2>Settings</h2>
+        <label class="toggle-row">Sound Effects <input type="checkbox" id="toggle-sfx" checked></label>
+        <label class="toggle-row">Music <input type="checkbox" id="toggle-music" checked></label>
+        <label class="toggle-row">Screen Shake <input type="checkbox" id="toggle-shake" checked></label>
+        <label class="toggle-row">Particles <input type="checkbox" id="toggle-particles" checked></label>
+        <button id="btn-settings-back" class="btn btn-secondary">← Back</button>
+      </div>
+    </div>
+
+    <!-- SCREEN: Game -->
+    <div id="screen-game" class="screen">
+      <!-- HUD Top Bar -->
+      <div id="hud">
+        <div id="hud-level">Level <span id="hud-level-num">1</span></div>
+        <div id="hud-score-wrap">
+          <div id="hud-score-label">SCORE</div>
+          <div id="hud-score">0</div>
+        </div>
+        <button id="btn-pause" class="btn-icon">⏸</button>
+      </div>
+
+      <!-- Objectives Panel -->
+      <div id="objectives-panel">
+        <div id="objectives-list"></div>
+      </div>
+
+      <!-- Moves + Progress -->
+      <div id="status-bar">
+        <div id="moves-wrap">
+          <span id="moves-label">Moves</span>
+          <span id="moves-count">30</span>
+        </div>
+        <div id="progress-wrap">
+          <div id="progress-bar-bg">
+            <div id="progress-bar-fill"></div>
+          </div>
+          <div id="progress-star-markers">
+            <span class="star-marker" style="left:33%">⭐</span>
+            <span class="star-marker" style="left:66%">⭐</span>
+            <span class="star-marker" style="left:99%">⭐</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combo Indicator -->
+      <div id="combo-indicator" class="hidden">
+        <span id="combo-text">COMBO x2</span>
+      </div>
+
+      <!-- Game Board -->
+      <div id="board-container">
+        <div id="board"></div>
+        <!-- Particle + Floating Text Layer -->
+        <div id="fx-layer"></div>
+      </div>
+    </div>
+
+    <!-- SCREEN: Pause Menu -->
+    <div id="screen-pause" class="screen overlay-screen">
+      <div class="panel-card">
+        <h2>Paused</h2>
+        <button id="btn-resume" class="btn btn-primary">Resume</button>
+        <button id="btn-restart" class="btn btn-secondary">Restart Level</button>
+        <button id="btn-quit" class="btn btn-danger">Main Menu</button>
+      </div>
+    </div>
+
+    <!-- SCREEN: Level Complete -->
+    <div id="screen-win" class="screen overlay-screen">
+      <div class="panel-card win-card">
+        <div class="win-title">Sweet!</div>
+        <div id="win-stars" class="star-row"></div>
+        <div class="win-score-wrap">Score: <span id="win-score">0</span></div>
+        <div id="win-highscore-badge" class="hidden">🏆 New High Score!</div>
+        <button id="btn-next-level" class="btn btn-primary btn-pulse">Next Level →</button>
+        <button id="btn-win-menu" class="btn btn-secondary">Main Menu</button>
+      </div>
+    </div>
+
+    <!-- SCREEN: Game Over -->
+    <div id="screen-gameover" class="screen overlay-screen">
+      <div class="panel-card gameover-card">
+        <div class="gameover-title">Out of Moves!</div>
+        <div class="gameover-score-wrap">Score: <span id="gameover-score">0</span></div>
+        <button id="btn-retry" class="btn btn-primary btn-pulse">Try Again</button>
+        <button id="btn-gameover-menu" class="btn btn-secondary">Main Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Files -->
+  <script src="js/utils.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/candy.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/matcher.js"></script>
+  <script src="js/solver.js"></script>
+  <script src="js/swapper.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/screens.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

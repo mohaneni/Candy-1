@@ -1,0 +1,280 @@
+/* Screen-Specific Styles */
+
+/* Game Screen - Mobile Layout */
+#screen-game {
+  justify-content: flex-start;
+  gap: 0;
+  padding-top: max(8px, env(safe-area-inset-top));
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 768px) {
+  #screen-game {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Win Screen */
+.win-card {
+  animation: win-card-entrance 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  border: 3px solid #FFD700;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(255, 215, 0, 0.4);
+}
+
+.win-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  color: #FFD700;
+  text-shadow: 
+    0 0 20px rgba(255, 215, 0, 0.8),
+    0 4px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.star-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 1.5rem 0;
+  font-size: 3rem;
+}
+
+.star-row .star {
+  display: inline-block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.star-row .star.earned {
+  animation: win-star-spin 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.star-row .star.empty {
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.win-score-wrap {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #c9a0ff;
+  margin: 1rem 0;
+}
+
+#win-score {
+  color: #FFD700;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.8rem;
+}
+
+#win-highscore-badge {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #1a0533;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 900;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.6);
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+/* Gameover Screen */
+.gameover-card {
+  animation: gameover-shake-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  border: 3px solid #ff4444;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(255, 68, 68, 0.4);
+}
+
+.gameover-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2rem, 7vw, 3rem);
+  color: #ff4444;
+  text-shadow: 
+    0 0 20px rgba(255, 68, 68, 0.8),
+    0 4px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+}
+
+.gameover-score-wrap {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #c9a0ff;
+  margin: 1rem 0 1.5rem;
+}
+
+#gameover-score {
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.6rem;
+}
+
+/* Pause Screen */
+#screen-pause .panel-card {
+  animation: fade-in 0.3s ease forwards;
+}
+
+#screen-pause .panel-card h2 {
+  margin-bottom: 2rem;
+}
+
+/* Settings Screen */
+#screen-settings {
+  justify-content: center;
+}
+
+#screen-settings .panel-card {
+  animation: fade-in 0.3s ease forwards;
+}
+
+/* Button Spacing in Screens */
+.panel-card .btn {
+  margin: 8px 0;
+  width: 100%;
+}
+
+.panel-card .btn:first-of-type {
+  margin-top: 0;
+}
+
+/* Confetti Background Effect for Win Screen */
+.win-card::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle, transparent 20%, rgba(255, 215, 0, 0.1) 20%, transparent 21%),
+    radial-gradient(circle, transparent 20%, rgba(255, 165, 0, 0.1) 20%, transparent 21%);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  animation: menu-float 30s linear infinite;
+  opacity: 0.6;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Responsive Adjustments - Mobile First */
+@media (max-width: 768px) {
+  .win-card, .gameover-card {
+    min-width: 85vw;
+    max-width: 85vw;
+    padding: 2rem 1.5rem;
+  }
+  
+  .win-title {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    margin-bottom: 1.2rem;
+  }
+  
+  .star-row {
+    font-size: 3rem;
+    gap: 10px;
+    margin: 1.2rem 0;
+  }
+  
+  .win-score-wrap {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+  }
+  
+  #win-score {
+    font-size: 1.7rem;
+  }
+  
+  .gameover-title {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+    margin-bottom: 1.2rem;
+  }
+  
+  .gameover-score-wrap {
+    font-size: 1.15rem;
+    margin: 1rem 0 1.5rem;
+  }
+  
+  #gameover-score {
+    font-size: 1.6rem;
+  }
+  
+  #win-highscore-badge {
+    font-size: 1rem;
+    padding: 10px 18px;
+    margin-bottom: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .win-card, .gameover-card {
+    min-width: 90vw;
+    max-width: 90vw;
+    padding: 1.5rem 1.2rem;
+  }
+  
+  .win-title {
+    font-size: clamp(2rem, 9vw, 3rem);
+    margin-bottom: 1rem;
+  }
+  
+  .star-row {
+    font-size: 2.5rem;
+    gap: 8px;
+    margin: 1rem 0;
+  }
+  
+  .win-score-wrap {
+    font-size: 1.1rem;
+    margin: 0.8rem 0;
+  }
+  
+  #win-score {
+    font-size: 1.5rem;
+  }
+  
+  .gameover-title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    margin-bottom: 1rem;
+  }
+  
+  .gameover-score-wrap {
+    font-size: 1.05rem;
+  }
+  
+  #gameover-score {
+    font-size: 1.4rem;
+  }
+  
+  #win-highscore-badge {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .win-card, .gameover-card {
+    padding: 1.2rem 1.2rem;
+  }
+  
+  .win-title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    margin-bottom: 0.8rem;
+  }
+  
+  .star-row {
+    font-size: 2.2rem;
+    margin: 0.8rem 0;
+  }
+  
+  .panel-card .btn {
+    margin: 4px 0;
+    padding: 10px 24px;
+    min-height: 42px;
+  }
+}

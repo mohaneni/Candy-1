@@ -1,0 +1,314 @@
+/* UI Components: HUD, Objectives, Progress, Combo */
+
+/* HUD Top Bar */
+#hud {
+  width: min(95vw, 500px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#hud-level {
+  color: #c9a0ff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#hud-score-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#hud-score-label {
+  font-size: 0.65rem;
+  color: #c9a0ff;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+#hud-score {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2rem;
+  color: #FFD700;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  transition: transform 0.15s ease;
+  line-height: 1;
+}
+
+#hud-score.score-bump {
+  animation: score-bump 0.25s ease-out;
+}
+
+/* Objectives Panel */
+#objectives-panel {
+  width: min(95vw, 500px);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+  justify-content: center;
+}
+
+.objective-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  color: white;
+  font-weight: 700;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.objective-item.completed {
+  background: rgba(102, 187, 106, 0.3);
+  border-color: #66bb6a;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* Status Bar: Moves + Progress */
+#status-bar {
+  width: min(95vw, 500px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+#moves-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 48px;
+}
+
+#moves-count {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2rem;
+  color: white;
+  line-height: 1;
+}
+
+#moves-count.low-moves {
+  color: #ff4444;
+  animation: pulse-glow 1s ease-in-out infinite;
+}
+
+#moves-label {
+  font-size: 0.65rem;
+  color: #c9a0ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Progress Bar */
+#progress-wrap {
+  flex: 1;
+  position: relative;
+}
+
+#progress-bar-bg {
+  height: 18px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+}
+
+#progress-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #ff6fd8, #ff4e8e, #ffb347);
+  background-size: 200% 100%;
+  animation: progress-shimmer 2s linear infinite;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 0%;
+}
+
+#progress-star-markers {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.star-marker {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease;
+}
+
+.star-marker.earned {
+  transform: translateX(-50%) scale(1.3);
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+}
+
+/* Combo Indicator */
+#combo-indicator {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 200;
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  color: #FFD700;
+  text-shadow: 
+    0 0 30px rgba(255, 215, 0, 0.8),
+    0 4px 8px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#combo-indicator.show {
+  animation: combo-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Responsive - Mobile Optimized */
+@media (max-width: 768px) {
+  #hud {
+    width: min(98vw, 100%);
+    padding: 10px 14px;
+    margin-bottom: 6px;
+    border-radius: 12px;
+  }
+  
+  #hud-level {
+    font-size: 0.85rem;
+  }
+  
+  #hud-score-label {
+    font-size: 0.6rem;
+  }
+  
+  #hud-score {
+    font-size: 1.7rem;
+  }
+  
+  #objectives-panel {
+    width: min(98vw, 100%);
+    gap: 6px;
+    margin-bottom: 5px;
+  }
+  
+  .objective-item {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 16px;
+  }
+  
+  #status-bar {
+    width: min(98vw, 100%);
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  
+  #moves-count {
+    font-size: 1.8rem;
+  }
+  
+  #moves-label {
+    font-size: 0.6rem;
+  }
+  
+  #progress-bar-bg {
+    height: 16px;
+  }
+  
+  .star-marker {
+    font-size: 1.1rem;
+  }
+  
+  #combo-indicator {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+  
+  .btn-icon {
+    font-size: 1.3rem;
+    padding: 6px;
+    min-width: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  #hud {
+    padding: 8px 10px;
+  }
+  
+  #hud-level {
+    font-size: 0.75rem;
+  }
+  
+  #hud-score {
+    font-size: 1.5rem;
+  }
+  
+  #hud-score-label {
+    font-size: 0.55rem;
+  }
+  
+  #moves-count {
+    font-size: 1.6rem;
+  }
+  
+  #moves-label {
+    font-size: 0.55rem;
+  }
+  
+  .objective-item {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+  
+  #progress-bar-bg {
+    height: 14px;
+  }
+  
+  .star-marker {
+    font-size: 0.95rem;
+  }
+  
+  .btn-icon {
+    font-size: 1.2rem;
+    min-width: 32px;
+  }
+}
+
+@media (max-height: 700px) {
+  #hud {
+    padding: 6px 10px;
+    margin-bottom: 4px;
+  }
+  
+  #objectives-panel {
+    margin-bottom: 4px;
+  }
+  
+  #status-bar {
+    margin-bottom: 4px;
+  }
+  
+  #hud-score {
+    font-size: 1.4rem;
+  }
+  
+  #moves-count {
+    font-size: 1.5rem;
+  }
+}
